@@ -2,6 +2,8 @@ import { RequestContext } from '@mastra/core/request-context';
 import { describe, expect, it, vi } from 'vitest';
 
 import { createFixtureRuntime } from '../src/mastra/adapters/fixture/fixture-runtime.js';
+import { createConnectors } from '../src/mastra/composition/create-connectors.js';
+import { loadConfig } from '../src/mastra/config.js';
 import { LibSqlOperationalStore } from '../src/mastra/memory/operational-stores.js';
 import { buildCustomerSuccessMonitoringReport } from '../src/mastra/monitoring/customer-success-report.js';
 import { approvalRequestSchema } from '../src/mastra/schemas/index.js';
@@ -10,6 +12,32 @@ import { accountRunInputSchema, approvalResumeSchema } from '../src/mastra/workf
 import { scheduledInputSchema } from '../src/mastra/workflows/scheduled-workflow.js';
 
 describe('template primitives', () => {
+  it('allows every data source to be replaced independently', () => {
+    const runtime = createFixtureRuntime();
+    const store = new LibSqlOperationalStore(':memory:');
+    try {
+      const connectors = createConnectors(loadConfig({ CRM_PROVIDER: 'fixture', MASTRA_DB_URL: ':memory:' }), store, {
+        usage: runtime.fixtures,
+        support: runtime.fixtures,
+        billing: runtime.fixtures,
+        crm: runtime.fixtures,
+        crmWriter: runtime.writer,
+        clock: runtime.clock,
+      });
+
+      expect(connectors).toMatchObject({
+        usage: runtime.fixtures,
+        support: runtime.fixtures,
+        billing: runtime.fixtures,
+        crm: runtime.fixtures,
+        crmWriter: runtime.writer,
+        clock: runtime.clock,
+      });
+    } finally {
+      store.close();
+    }
+  });
+
   it('registers connector-neutral CRM tools', () => {
     const runtime = createFixtureRuntime();
     const tools = createCrmTools(runtime.fixtures, runtime.writer);

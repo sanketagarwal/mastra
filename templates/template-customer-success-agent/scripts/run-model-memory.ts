@@ -7,7 +7,7 @@ if (!process.env.OPENAI_API_KEY && !process.env.ANTHROPIC_API_KEY && !process.en
 
 const config = loadConfig({
   ...process.env,
-  DATA_SOURCE: 'fixture',
+  CRM_PROVIDER: 'fixture',
   GENERATION_MODE: 'model',
   ENABLE_OBSERVATIONAL_MEMORY: 'true',
   ENABLE_SEMANTIC_RECALL: 'true',

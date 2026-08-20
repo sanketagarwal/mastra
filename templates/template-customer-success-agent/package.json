@@ -1,7 +1,7 @@
 {
   "name": "template-customer-success-agent",
   "version": "1.0.0",
-  "description": "A scheduled customer-success agent that finds renewal risk, prepares follow-up, waits for CSM approval, and updates CRM.",
+  "description": "A provider-neutral customer-success agent that finds renewal risk, prepares follow-up, waits for CSM approval, and updates CRM.",
   "private": true,
   "license": "Apache-2.0",
   "type": "module",

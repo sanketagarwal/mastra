@@ -41,7 +41,7 @@ describe('HubSpot and fixture hybrid mode', () => {
 
   it('keeps the hybrid composition clock pinned to fixture time', () => {
     const config = loadConfig({
-      DATA_SOURCE: 'hubspot',
+      CRM_PROVIDER: 'hubspot',
       TENANT_ID: 'customer-tenant',
       FIXTURE_TENANT_ID: 'demo-tenant',
       FIXTURE_NOW: fixtureAsOf,

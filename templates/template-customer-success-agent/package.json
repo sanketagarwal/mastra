@@ -1,0 +1,40 @@
+{
+  "name": "template-customer-success-agent",
+  "version": "1.0.0",
+  "description": "A provider-neutral customer-success agent that finds renewal risk, prepares follow-up, waits for CSM approval, and updates CRM.",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "mastra dev",
+    "build": "mastra build",
+    "start": "mastra start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run validate",
+    "demo": "tsx scripts/run-fixtures.ts",
+    "demo:model-memory": "tsx scripts/run-model-memory.ts",
+    "evals": "tsx scripts/run-evals.ts",
+    "monitoring:report": "tsx scripts/monitoring-report.ts",
+    "validate": "npm run typecheck && npm test && npm run evals && npm run demo && npm run monitoring:report && npm run build"
+  },
+  "dependencies": {
+    "@libsql/client": "0.17.4",
+    "@mastra/core": "latest",
+    "@mastra/libsql": "latest",
+    "@mastra/memory": "latest",
+    "@mastra/observability": "latest",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "mastra": "latest",
+    "tsx": "4.23.12",
+    "typescript": "6.0.3",
+    "vitest": "4.1.11"
+  }
+}
